@@ -544,6 +544,16 @@ describe('resolveUploadErrorMessage', () => {
     expect(resolveUploadErrorMessage({ message: msg })).toBe(msg);
   });
 
+  test('surfaces "exceeds the 15MB storage limit" errors', () => {
+    const msg = 'File size exceeds the 15MB storage limit (22MB). Try a shorter document.';
+    expect(resolveUploadErrorMessage({ message: msg })).toBe(msg);
+  });
+
+  test('surfaces "exceeds the 15MB document parser limit" errors', () => {
+    const msg = 'File size exceeds the 15MB document parser limit (18MB). Try a shorter document.';
+    expect(resolveUploadErrorMessage({ message: msg })).toBe(msg);
+  });
+
   test('accepts a custom default message', () => {
     expect(resolveUploadErrorMessage(null, 'Custom default')).toBe('Custom default');
   });
